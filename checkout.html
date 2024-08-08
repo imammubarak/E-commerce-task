@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Al-Mubarak Store</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <ion-icon class="menu-toggle" name = "menu-outline"></ion-icon>
+        <div class="logo"><img src="images/logo.png" width="50px" alt="Al-Mubarak"> unique</div>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="product.html">Shop</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+        <div class="search-bar">
+            <img src="images/search.png" class="search-img">
+            <input type="text" placeholder="Search products...">
+            <button>search</button>
+        </div>
+        <div class="cart-icon">
+            <a href="cart.html"><ion-icon name = "cart-outline"></ion-icon>Cart (<span id="cart-count">0</span>)</a>
+        </div>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    </header>
+    <main>
+        <h1>Checkout</h1>
+        <form id="checkout-form">
+            <section class="billing-info">
+                <h2>Billing Information</h2>
+                
+                <input type="text" placeholder="Name" id="billing-name" required>
+                
+                <input type="text" placeholder="Address" id="billing-address" required>
+                
+                <input type="email" placeholder="Email" id="billing-email" required>
+                
+                <input type="tel" placeholder="Phone Number" id="billing-phone" required>
+            </section>
+            <section class="shipping-info">
+                <h2>Shipping Information</h2>
+            
+                <input type="text" placeholder="Name" id="shipping-name" required>
+                
+                <input type="text" placeholder="Address" id="shipping-address" required>
+                
+                <input type="email" placeholder="Email" id="shipping-email" required>
+                
+                <input type="tel" placeholder="Phone Number" id="shipping-phone" required>
+            </section>
+            <section class="payment-info">
+                <h2>Payment Information</h2>
+                <input type="text" placeholder="Card Number" id="payment-card-number" required>
+                <input type="text" placeholder="Expiry Date" id="payment-expiry-date" required>
+                <input type="text" placeholder="CVV" id="payment-cvv" required>
+                <input type="password" placeholder="password" id="payment-cvv" required>
+            </section>
+            <section class="order-summary">
+                <h2>Order Summary</h2>
+                <div id="order-summary-items">
+                    <!-- Order summary items will be dynamically added here -->
+                </div>
+                <div class="order-summary-total">
+                    <p>Subtotal: $<span id="order-summary-subtotal">0.00</span></p>
+                    <p>Total: $<span id="order-summary-total">0.00</span></p>
+                </div>
+            </section>
+            <button type="submit" class="btn">Place Order</button>
+        </form>
+    </main>
+    <footer>
+        <div class="social-media">
+            <a href="#"><img src="images/facebook.png" alt="">Facebook</a>
+            <a href="#"><img src="images/twitter.png" alt="">Twitter</a>
+            <a href="#"><img src="images/camera.png" alt="">Instagram</a>
+        </div>
+        <div> &copy imam Almubarak|KODECAMP 4.0</div>
+        <div class="contact-info">
+            <p>Email: info@almubarak.com</p>
+            <p>Phone: 123-456-7890</p>
+        </div>
+    </footer>
+    <script src="checkout.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+</body>
+</html>
