@@ -13,9 +13,9 @@ document.addEventListener('DOMContentLoaded', function() {
         description: 'This is quality hoodie material direct from UK.',
         price: 99.99,
         images: [
-            '../images/product-1.jpeg',
-            '../images/product-2.jpeg',
-            '../images/product-3.jpeg'
+            'images/product-1.jpeg',
+            'images/product-2.jpeg',
+            'images/product-3.jpeg'
         ]
     };
 
