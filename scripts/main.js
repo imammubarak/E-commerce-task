@@ -14,7 +14,7 @@ async function fetchAndDisplayCategories() {
             categoriesContainer.innerHTML = categories.map(category => `
                 <div class="category-item">
                     <a href="category.html?category=${category}">
-                        <div class="category-name">${category}</div>
+                        <div class="category-name">${category},</div>
                     </a>
                 </div>
             `).join('');
@@ -193,6 +193,97 @@ function init() {
         proceedToCheckoutButton.addEventListener('click', proceedToCheckout);
     }
 }
+
+
+// Fetch and display categories
+function fetchAndDisplayCategories() {
+    fetch('https://fakestoreapi.com/products/categories')
+        .then(response => response.json())
+        .then(categories => {
+            const categoriesContainer = document.getElementById('categories-container');
+            if (!categoriesContainer) return;
+            categoriesContainer.innerHTML = '';
+            categories.forEach(category => {
+                const categoryElement = document.createElement('div');
+                categoryElement.className = 'category-item';
+                categoryElement.innerHTML = `
+                    <div class="category-name">${category}</div>
+                    <button onclick="filterProductsByCategory('${category}')">View Products</button>
+                `;
+                categoriesContainer.appendChild(categoryElement);
+            });
+        })
+        .catch(error => console.error('Error fetching categories:', error));
+}
+
+// Fetch and display products by category
+function filterProductsByCategory(category) {
+    const formattedCategory = category.replace(/\s+/g, '%20');
+    fetch(`https://fakestoreapi.com/products/category/${formattedCategory}`)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            return response.json();
+        })
+        .then(products => {
+            const productsContainer = document.getElementById('products-container');
+            if (!productsContainer) return;
+            productsContainer.innerHTML = '';
+            if (products.length === 0) {
+                productsContainer.innerHTML = '<p>No products found in this category.</p>';
+                return;
+            }
+            products.forEach(product => {
+                const productElement = document.createElement('div');
+                productElement.className = 'product-item';
+                productElement.innerHTML = `
+                    <img src="${product.image}" alt="${product.title}">
+                    <h3>${product.title}</h3>
+                    <p>$${product.price}</p>
+                    <button onclick="addToCart(${product.id})">Add to Cart</button>
+                `;
+                productsContainer.appendChild(productElement);
+            });
+        })
+        .catch(error => console.error('Error fetching products:', error));
+}
+
+// Add to Cart
+function addToCart(productId) {
+    fetch(`https://fakestoreapi.com/products/${productId}`)
+        .then(response => response.json())
+        .then(product => {
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            const existingProduct = cart.find(item => item.id === product.id);
+            if (existingProduct) {
+                existingProduct.quantity += 1;
+            } else {
+                product.quantity = 1;
+                cart.push(product);
+            }
+            localStorage.setItem('cart', JSON.stringify(cart));
+            updateCartCount();
+        })
+        .catch(error => console.error('Error adding to cart:', error));
+}
+
+// Update Cart Count
+function updateCartCount() {
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+    const totalQuantity = cart.reduce((total, product) => total + product.quantity, 0);
+    const cartCountElement = document.getElementById('cart-count');
+    if (cartCountElement) {
+        cartCountElement.textContent = totalQuantity;
+    }
+}
+
+// Initialize the categories display on page load
+document.addEventListener('DOMContentLoaded', () => {
+    fetchAndDisplayCategories();
+    updateCartCount();
+});
+
 
 document.addEventListener('DOMContentLoaded', init);
 
